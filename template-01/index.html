@@ -526,7 +526,10 @@
         
             width: dataUsage == "unlimited" ? "∞" : dataUsage+"%" ,
             color: dataUsage == "unlimited" ? "" : dataChartColor,
-            gradientInject: dataUsage == "unlimited" ? `background: conic-gradient(#fd004c,#fe9000,#fff020,#3edf4b,#3363ff,#b102b7,#fd004c);   animation: spin 1.5s infinite linear;` : "" ,
+            gradientInject: dataUsage == "unlimited" ? `background: conic-gradient(#fd004c,#fe9000,#fff020,#3edf4b,#3363ff,#b102b7,#fd004c);   animation: spin 1.5s infinite linear;position: absolute;
+height: 100%;
+width: 100%;
+z-index: 0;` : "" ,
             //animation: a 2s linear infinite;
         };
 
