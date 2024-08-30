@@ -16,13 +16,14 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs-i18n@2.4.0/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@2.2.0/dist/alpine-clipboard.js"></script>
     <script>
-        const dataLimit = "{% if not user.data_limit %}∞{% else %}{{ user.data_limit }}{% endif %}";
+        const dataLimit = "{% if not user.data_limit %}unlimited{% else %}{{ user.data_limit }}{% endif %}";
         const dataUsed = "{{ user.used_traffic }}";
         const expireDateInit = "{% if user.status.value == 'on_hold' %}-{% elif not user.expire %}∞{% else %}{% set current_timestamp = now().timestamp() %}{{ user.expire | datetime }}{% endif %}";
         var tmpUsage = ( ( parseFloat( dataUsed ) / parseFloat( dataLimit ) ) * 100 ).toFixed( 2 );
         if ( tmpUsage > 100 ) tmpUsage = 100; <!--?????????????????????????????????-->
         /*const dataUsage = dataLimit == "∞" ? 100 : tmpUsage;*/
-        const dataUsage = dataLimit == "∞" || typeof dataLimit == "string" ? 0 : tmpUsage
+        console.log(dataLimit)
+        const dataUsage = dataLimit == "∞" ? 0 : tmpUsage
         const dataChartColor = dataUsage < 40 ? "bg-green-600" : dataUsage < 80 ? "bg-yellow-600" : "bg-red-500";
         const resetInterval = "{{ user.data_limit_reset_strategy.value }}";
         let expireDateVar = expireDateInit.includes( "∞" ) ? "∞" : localStorage.getItem( "lang" ) == "ru" ? new Date( expireDateInit ).toLocaleString( "fa-IR-u-nu-latn" ).replace( ",", " " ) : expireDateInit;
@@ -271,7 +272,7 @@
                 proxy: "Прокси",
                 tutorial: "руководство",
                 download: "Скачать",
-                support: "Поддержка телеграмм",
+                support: "Поддержка в телеграмм",
                 import: "Импортировать в приложение",
                 autoImport: "Автоматический импорт",
             },
