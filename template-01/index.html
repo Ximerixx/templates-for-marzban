@@ -338,7 +338,7 @@
                         <div class="data-usage w-full" x-data="progressBar" x-init="Alpine.data( 'progressBar', () => progressBar )">
                             <div class="dark:text-white text-black text-center"><span class="font-bold" x-text="$t('dataUsage')"></span><span dir="ltr">{{ user.used_traffic | bytesformat }} / {% if not user.data_limit %}∞{% else %}{{ user.data_limit | bytesformat }}{% endif %}</span></div>
                             <div class="bg-gray-200 dark:bg-gray-900 rounded-full h-6 mt-5 drop-shadow-lg overflow-hidden" role="progressbar" :aria-valuenow="width" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar rounded-full h-6 text-center w-full dark:text-white text-black text-sm transition leading-6" :class="color" :style="`width: ${width}; transition: width 2s;`">
+                                <div class="progress-bar rounded-full h-6 text-center w-full dark:text-white text-black text-sm transition leading-6" :class="color" :style="`width: ${width};${gradientInject} transition: width 2s;`">
                                     <span class="absolute w-full left-0" x-text="`${width}`"></span>
                                 </div>
                             </div>
@@ -524,8 +524,9 @@
         const gradient = "linear-gradient(rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%) 0 0/100% 200%"
         let progressBar = {
         
-            width: typeof dataUsage =="string" || dataUsage == "unlimited" ? "" : dataUsage + "%" ,
-            color: typeof dataUsage =="string" || dataUsage == "unlimited" ? gradient : dataChartColor,
+            width: dataUsage == "unlimited" ? "" : dataUsage+"%" ,
+            color: dataUsage == "unlimited" ? "" : dataChartColor,
+            gradientInject: `--animation: spin 5s infinite linear; --rainbow: conic-gradient(#fd004c, #fe9000, #fff020, #3edf4b, #3363ff, #b102b7, #fd004c);`,
             //animation: a 2s linear infinite;
         };
 
