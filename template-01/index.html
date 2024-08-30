@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs-i18n@2.4.0/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@2.2.0/dist/alpine-clipboard.js"></script>
     <script>
-        const dataLimit = "{% if not user.data_limit %}unlimited{% else %}{{ user.data_limit }}{% endif %}";
+        const dataLimit = "{% if not user.data_limit %}∞{% else %}{{ user.data_limit }}{% endif %}";
         const dataUsed = "{{ user.used_traffic }}";
         const expireDateInit = "{% if user.status.value == 'on_hold' %}-{% elif not user.expire %}∞{% else %}{% set current_timestamp = now().timestamp() %}{{ user.expire | datetime }}{% endif %}";
         var tmpUsage = ( ( parseFloat( dataUsed ) / parseFloat( dataLimit ) ) * 100 ).toFixed( 2 );
